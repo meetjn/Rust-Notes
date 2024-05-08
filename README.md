@@ -227,3 +227,168 @@ The other difference between mut and shadowing is that because we’re effective
     let spaces = spaces.len();
 The first spaces variable is a string type and the second spaces variable is a number type. Shadowing thus spares us from having to come up with different names, such as spaces_str and spaces_num; instead, we can reuse the simpler spaces name. However, if we try to use mut for this, as shown here, we’ll get a compile-time error:
 
+## Data Types
+
+There are two types of data types available in Rust which are: Scalar and Compound.
+
+Rust is a statically typed language, which means that it must know the types of all variables at compile time
+
+### Scalar Types
+
+A scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.
+
+Length	Signed	Unsigned
+8-bit	 i8	      u8
+16-bit	i16	      u16
+32-bit	i32	      u32
+64-bit	i64	      u64
+128-bit	i128	  u128
+arch	isize	  usize
+
+This type declaration indicates that the value it’s associated with should be an unsigned integer (signed integer types start with i instead of u) that takes up 32 bits of space.
+
+Read data types from here: https://doc.rust-lang.org/book/ch03-02-data-types.html
+
+### Compound Types
+
+Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.
+
+The Tuple Type
+
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length: once declared, they cannot grow or shrink in size.
+
+We create a tuple by writing a comma-separated list of values inside parentheses. Each position in the tuple has a type, and the types of the different values in the tuple don’t have to be the same. We’ve added optional type annotations in this example:
+
+Filename: src/main.rs
+
+fn main() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+}
+
+This program creates the tuple x and then accesses each element of the tuple using their respective indices. As with most programming languages, the first index in a tuple is 0.
+
+The tuple without any values has a special name, unit. This value and its corresponding type are both written () and represent an empty value or an empty return type. Expressions implicitly return the unit value if they don’t return any other value.
+
+
+The Array Type
+
+Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an array must have the same type. Unlike arrays in some other languages, arrays in Rust have a fixed length.
+
+We write the values in an array as a comma-separated list inside square brackets:
+
+Filename: src/main.rs
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+}
+
+You write an array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array, like so:
+
+let a: [i32; 5] = [1, 2, 3, 4, 5];
+Here, i32 is the type of each element. After the semicolon, the number 5 indicates the array contains five elements.
+
+You can also initialize an array to contain the same value for each element by specifying the initial value, followed by a semicolon, and then the length of the array in square brackets, as shown here:
+
+let a = [3; 5];
+The array named a will contain 5 elements that will all be set to the value 3 initially. This is the same as writing let a = [3, 3, 3, 3, 3]; but in a more concise way.
+
+Accessing Array Elements
+
+An array is a single chunk of memory of a known, fixed size that can be allocated on the stack. You can access elements of an array using indexing, like this:
+
+Filename: src/main.rs
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
+}
+In this example, the variable named first will get the value 1 because that is the value at index [0] in the array. The variable named second will get the value 2 from index [1] in the array.
+
+## Funtions
+
+Rust code uses snake case as the conventional style for function and variable names, in which all letters are lowercase and underscores separate words. Here’s a program that contains an example function definition:
+
+Filename: src/main.rs
+
+fn main() {
+    println!("Hello, world!");
+
+    another_function();
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+
+We define a function in Rust by entering fn followed by a function name and a set of parentheses. The curly brackets tell the compiler where the function body begins and ends.
+
+### Statements and Expressions
+Rust is an expression-based language, this is an important distinction to understand. Other languages don’t have the same distinctions, so let’s look at what statements and expressions are and how their differences affect the bodies of functions.
+
+Statements are instructions that perform some action and do not return a value.
+Expressions evaluate to a resultant value. Let’s look at some examples.
+
+Function definitions are also statements; the entire preceding example is a statement in itself.
+
+Statements do not return values. Therefore, you can’t assign a let statement to another variable, as the following code tries to do; you’ll get an error:
+
+Filename: src/main.rs
+
+fn main() {
+    let x = (let y = 6);
+}
+
+## Functions with Return Values
+
+Functions can return values to the code that calls them. We don’t name return values, but we must declare their type after an arrow (->). In Rust, the return value of the function is synonymous with the value of the final expression in the block of the body of a function. You can return early from a function by using the return keyword and specifying a value, but most functions return the last expression implicitly. Here’s an example of a function that returns a value:
+
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+
+    println!("The value of x is: {x}");
+}
+
+Read Control flow docs here: https://doc.rust-lang.org/book/ch03-05-control-flow.html
+
+## Repetition with Loops
+
+Repeating Code with loop
+
+The loop keyword tells Rust to execute a block of code over and over again forever or until you explicitly tell it to stop.
+
+Quetion: wap to print fibonacci number in rust!
+
+fn main() {
+    let num = 7;
+    let result = fibo(num);
+    println!("{}", result);
+
+}
+fn fibo(num: i32) -> i32{
+    if num < 2{
+        return num;
+    }
+    return fibo(num-1) + fibo(num - 2);
+}fn main() {
+    let num = 7;
+    let result = fibo(num);
+    println!("{}", result);
+
+}
+fn fibo(num: i32) -> i32{
+    if num < 2{
+        return num;
+    }
+    return fibo(num-1) + fibo(num - 2);
+}
+
+The fibo function returns an i32.
+In the base case (num < 2), it returns num.
+In the recursive case, it returns the sum of the two previous Fibonacci numbers.
+In the main function, the result of fibo(num) is stored in a variable result, and then result is printed using println!("{}", result).
