@@ -392,3 +392,19 @@ The fibo function returns an i32.
 In the base case (num < 2), it returns num.
 In the recursive case, it returns the sum of the two previous Fibonacci numbers.
 In the main function, the result of fibo(num) is stored in a variable result, and then result is printed using println!("{}", result).
+
+## References and Borrowing in Rust
+In Rust, references allow you to refer to a value without taking ownership of it. This is known as borrowing. References are denoted by the & symbol.
+There are two types of references in Rust:
+
+
+Immutable references (&T): These allow you to read the value being referenced, but not modify it. You can have multiple immutable references to the same value at the same time.
+
+Mutable references (&mut T): These allow you to both read and modify the value being referenced. However, you can only have one mutable reference to a particular value in a particular scope to prevent data races.
+
+
+Rust's borrow checker enforces these rules at compile-time to ensure memory safety and prevent common errors like null pointer dereferences. Some key points about references and borrowing:
+1. References must always be valid and point to a value that exists.
+2. A value cannot have both mutable and immutable references at the same time.
+3. Mutable references have a limited scope - they are only valid until the end of the current block of code.
+4. Passing a reference to a function is more efficient than passing the value itself, as it avoids copying the data.
